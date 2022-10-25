@@ -7,37 +7,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    @IBOutlet weak var alarmLabel: UILabel!
-    @IBOutlet weak var viewFirstLabel: UIView!
-    @IBOutlet weak var vloumeLevelLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var slider: UISlider!
-    
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var viewSecondLabel: UIView!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var setTimeButton: UIButton!
-    @IBOutlet weak var viewThirdLabel: UIView!
-    @IBOutlet weak var labelTime: UILabel!
-    @IBOutlet weak var switchTime: UISwitch!
-    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet private weak var alarmLabel: UILabel!
+    @IBOutlet private weak var viewFirstLabel: UIView!
+    @IBOutlet private weak var vloumeLevelLabel: UILabel!
+    @IBOutlet private weak var progressView: UIProgressView!
+    @IBOutlet private weak var slider: UISlider!
+    @IBOutlet private weak var textField: UITextField!
+    @IBOutlet private weak var viewSecondLabel: UIView!
+    @IBOutlet private weak var datePicker: UIDatePicker!
+    @IBOutlet private weak var setTimeButton: UIButton!
+    @IBOutlet private weak var viewThirdLabel: UIView!
+    @IBOutlet private weak var labelTime: UILabel!
+    @IBOutlet private weak var switchTime: UISwitch!
+    @IBOutlet private weak var clearButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         addDoneButton(textField)
-        
-        
-        
     }
+    
     @IBAction func sliderAction(_ sender: UISlider) {
         textField.text = String(slider.value)
         progressView.progress = slider.value
-        
     }
+    
     @IBAction func textFieldAction(_ sender: UITextField) {
         guard let text = sender.text else {return}
         if let currentValue = Float(text) {
@@ -50,11 +47,9 @@ class ViewController: UIViewController {
                 break
             }
             } else {showAlert(title: "Uncorrect value", message: "Enter value from 0 to 1")}
-        
     }
     
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
-        
     }
     
     @IBAction func setTimeButtonAction(_ sender: UIButton) {
@@ -62,9 +57,8 @@ class ViewController: UIViewController {
         formatter.timeStyle = .short
         formatter.dateFormat = "HH:mm"
         labelTime.text = formatter.string(from: datePicker.date)
-        
-        
     }
+    
     @IBAction func switchAction(_ sender: UISwitch) {
         if switchTime.isOn {
             setTimeButton.isEnabled = true
@@ -75,15 +69,12 @@ class ViewController: UIViewController {
             clearButton.isEnabled = false
             datePicker.isEnabled = false
             labelTime.text = ""
-            
         }
-        
-        
     }
+    
     @IBAction func clearButtonAction(_ sender: UIButton) {
         labelTime.text = ""
     }
-    
     
     // MARK: - Private
     
@@ -100,8 +91,6 @@ class ViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
-    
 }
 
 // MARK: - ViewController + UITextFieldDelegate
@@ -118,7 +107,6 @@ extension ViewController: UITextFieldDelegate {
         
         view.endEditing(true)
     }
-    
 }
 
 extension ViewController {
@@ -142,7 +130,5 @@ extension ViewController {
     @objc private func didTapDone() {
         view.endEditing(true)
     }
-    
-    
 }
 
